@@ -344,6 +344,68 @@ Output Parameters
 > 5. **Data Validation** - Authentication and authorization steps
 
 ### User Authentication Flow (O-RAN O1 Interface)
+```mermaid
+sequenceDiagram
+    participant SMO
+    participant OCU
+    participant DU APP
+    participant RLC
+    participant SCH
+    participant MAC
+    participant ODU_LOW
+    participant UE
+
+    title O-DU High Cell Up and Broadcast Procedure
+
+    SMO->>OCU: [O1_ENABLE]
+    OCU->>OCU: edit-config [Cell Configuration]
+    note right of OCU: Store Cell Configuration in local DB
+    
+    note over DU APP, ODU_LOW: Platform and layer initialization
+
+    OCU->>DU APP: F1 SETUP REQUEST
+    DU APP->>OCU: F1 SETUP RESPONSE
+
+    DU APP->>RLC: Cell Configuration Request
+    RLC->>SCH: Cell Configuration Request
+    SCH->>MAC: Cell Configuration Request
+    MAC->>ODU_LOW: CONFIG.Request
+    ODU_LOW-->>MAC: CONFIG.Response
+    MAC-->>SCH: Cell Configuration Response
+    SCH-->>RLC: Cell Configuration Response
+    RLC-->>DU APP: Cell Configuration Response
+
+    DU APP->>OCU: GNB-DU CONFIGURATION UPDATE
+    OCU-->>DU APP: GNB-DU CONFIGURATION UPDATE ACKNOWLEDGE
+
+    DU APP->>RLC: CELL START REQ
+    RLC->>SCH: CELL START REQ
+    SCH->>MAC: START.request
+    MAC->>ODU_LOW: SLOT Indication
+    ODU_LOW-->>MAC: SLOT Indication
+    MAC-->>SCH: SLOT INDICATION #1
+    SCH-->>RLC: SLOT INDICATION #1
+
+    RLC->>DU APP: CELL UP
+
+    alt O1_ENABLE
+        DU APP->>OCU: CELL UP Alarm Notification
+    end
+
+    MAC-->>SCH: SLOT INDICATION #2
+    MAC-->>SCH: SLOT INDICATION #n
+
+    SCH->>SCH: SSB OCCASION DETECTED
+    SCH->>MAC: DL SCHEDULING INFO
+    MAC->>ODU_LOW: DL TTI Req[SSB]
+    ODU_LOW->>UE: SSB(MIB)
+
+    SCH->>SCH: SIB1 OCCASION DETECTED
+    SCH->>MAC: DL SCHEDULING INFO
+    MAC->>ODU_LOW: DL TTI Req[PDCCH]
+    MAC->>ODU_LOW: TX TTI Req[PDSCH]
+    ODU_LOW->>UE: SIB
+```
 
 ```mermaid
 sequenceDiagram
