@@ -87,6 +87,72 @@ Write your installation/integration plan & status in here:
 5. **Management Interfaces** - O1 for configuration, alarms, and performance management
 6. **IP Addressing** - Clear network topology following O-RAN deployment patterns
 
+### O-DU System Architecture
+```mermaid
+graph TD
+    subgraph O-DU
+        subgraph DU APP
+            direction LR
+            subgraph " "
+                direction TB
+                O1[O1 Interface]
+                DUMgr[DU Manager]
+                UEMgr[UE Manager]
+            end
+            
+            Config[Config Handler]
+            
+            subgraph " "
+                direction TB
+                SCTP[SCTP Manager]
+                EGTP[EGTP Manager]
+                ASN1[ASN.1 Codecs]
+            end
+        end
+
+        subgraph L2 Stack
+            direction TB
+            RLC_UL[5G NR RLC UL]
+            RLC_DL[5G NR RLC DL]
+            
+            subgraph 5G NR MAC
+                SCH[5g NR SCH]
+                LowerMAC[Lower MAC]
+            end
+        end
+
+        Utils[O-DU Utility and Common Functions]
+    end
+
+    %% Define Connections
+    DU_APP <--> L2_Stack
+    DU_APP --> Utils
+    L2_Stack --> Utils
+    
+    %% Internal L2 Stack Connections
+    RLC_UL <--> 5G_NR_MAC
+    RLC_DL <--> 5G_NR_MAC
+    5G_NR_MAC <--> SCH
+
+    %% Styling to match the example image
+    style O-DU fill:#f0e6ff,stroke:#b39ddb,stroke-width:2px
+    style DU_APP fill:#cceeff,stroke:#0077c2,stroke-width:2px
+    style L2_Stack fill:#e8f5e9,stroke:#66bb6a,stroke-width:2px
+    style Config fill:#cceeff,stroke:#0077c2,stroke-width:2px
+    style O1 fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+    style DUMgr fill:#cceeff,stroke:#0077c2,stroke-width:2px
+    style UEMgr fill:#cceeff,stroke:#0077c2,stroke-width:2px
+    style SCTP fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+    style EGTP fill:#dcedc8,stroke:#558b2f,stroke-width:2px
+    style ASN1 fill:#cceeff,stroke:#0077c2,stroke-width:2px
+    style RLC_UL fill:#ffe0b2,stroke:#ef6c00,stroke-width:2px
+    style RLC_DL fill:#b2dfdb,stroke:#00695c,stroke-width:2px
+    style 5G_NR_MAC fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style LowerMAC fill:#d1c4e9,stroke:#4527a0,stroke-width:2px
+    style SCH fill:#c8e6c9,stroke:#2e7d32,stroke-width:1px,stroke-dasharray: 5 5
+    style Utils fill:#f5f5f5,stroke:#616161,stroke-width:2px
+```
+
 ```mermaid
 graph TD
     subgraph O-DU
@@ -440,7 +506,7 @@ sequenceDiagram
 ```
 
 ### Cell Configuration Flow (O-RAN F1 Interface)
-
+**O-DU Message Sequence Chart**
 ```mermaid
 sequenceDiagram
     participant SMO as SMO/OAM (192.168.100.10)
