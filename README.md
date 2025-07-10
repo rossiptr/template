@@ -4,7 +4,7 @@
 ## Project description
 
 **Project Name:** [Replace with actual project name]
-
+  
 **Description:** A comprehensive solution for [specific use case]. This project provides [key functionality] and enables users to [main benefits].
 
 **Key Features:**
@@ -30,6 +30,8 @@ to allow other people to quickly navigate especially long or detailed READMEs.
 
 - [Project description](#project-description)
 - [Table of Contents](#table-of-contents)
+- [Documentation Guideline](#documentation-guideline)
+  - [Action Steps](#action-steps)   
 - [Remote Access Methods](#remote-access-methods)
   - [SSH](#ssh)
   - [Anydesk](#anydesk)
@@ -48,6 +50,30 @@ to allow other people to quickly navigate especially long or detailed READMEs.
 - [Troubleshooting](#troubleshooting)
   - [Common Issues and Solutions](#common-issues-and-solutions)
 - [Additional Resources](#additional-resources)
+
+
+## Documentation Guideline
+1. Get Copilot education
+2. Use VScode & install these extensions:
+    - GitHub copilot
+    - Markdown All in One (auto-generate Table of Content)
+    - Typora (WYSIWYG) --> to make it similar with Notion for .md editing
+4. Explore the permium model in Copilot, such as Claude Sonnet
+
+### Action Steps
+1. Create a [GitHub account](https://github.com/join).
+2. Apply for [GitHub Education as a student](https://docs.github.com/en/education/about-github-education/github-education-for-students/apply-to-github-education-as-a-student)
+3. Download [Visual Studio Code](https://code.visualstudio.com/download) (for study notes writing).
+4. Install several VScode extensions:
+   - [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+      - Automatically generate & update the [table of content (ToC)](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents).
+      - [GitHub markdown features](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) information.
+   - Markdown Preview (Choose one):
+      - [Markdown Preview GitHub](http://marketplace.visualstudio.com/items?itemName=bierner.markdown-preview-github-styles)
+      - [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
+   - [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+   <br>Get free Copilot from [GitHub education](https://education.github.com/discount_requests/application).
+   - [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)
 
 ## Remote Access Methods
 
